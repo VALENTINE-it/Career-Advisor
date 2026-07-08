@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Valentine Omondi Awili",
+      "email": "valentineawili@gmail.com",
+      "password": "$2a$10$c5NeE4RucubSxYybjFuGLuhUds7ijIhhw8iFqg6OpHGt6C4F4Jxcy",
+      "created_at": "2026-07-08T22:07:09.630Z"
+    }
+  ],
+  "adviceHistory": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "grade": "A",
+      "suggestion": "Excellent — top-tier options: Medicine, Engineering, Actuarial Science, Law, Architecture",
+      "created_at": "2026-07-08T22:07:27.634Z"
+    }
+  ]
+}

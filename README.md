@@ -1,60 +1,42 @@
-# Career Advisory
+# Career Advisor
 
-A career-suggestion app with student and teacher accounts, backed by a MySQL database.
+A simple career-advisor website:
 
-## Structure
+- Registration & login (SQLite + bcrypt + sessions)
+- Landing page where a logged-in student enters their **overall grade (A / B / C / D / E)** and gets career suggestions
+- Rule-based (non-AI) chatbot with predefined prompts to talk to a "career advisor"
 
-```
-Frontend/   Plain HTML, CSS, and JS (no build step, no framework)
-Backend/    Express API with MySQL storage and JWT auth
-```
+## Stack
 
-## 1. Set up the database
+- **Frontend:** plain HTML, CSS, vanilla JS
+- **Backend:** Node.js + Express
+- **Database:** SQLite (via `better-sqlite3`) — auto-created as `data.db` on first run
 
-Make sure MySQL is running, then create the schema:
+## Run locally
 
-```
-mysql -u root -p < Backend/schema.sql
-```
-
-This creates a `career_advisory` database with two tables: `users` (students and teachers) and `grades` (each grade submission and its suggested career).
-
-## 2. Configure and start the backend
-
-```
-cd Backend
-cp .env.example .env
-# edit .env with your MySQL password and a random JWT_SECRET
+```bash
 npm install
 npm start
+or
+node server.js
 ```
 
-The API runs on `http://localhost:5000` by default.
+Then open http://localhost:3000
 
-## 3. Open the frontend
+## Grade → Career mapping (defaults)
 
-Open `Frontend/index.html` in a browser (or serve the folder with any static file server). It will send you to the login page if you're not signed in yet.
+| Grade | Suggested careers |
+|-------|-------------------|
+| A     | Medicine, Engineering, Actuarial Science, Law, Architecture |
+| B     | Computer Science, Nursing, Pharmacy, Economics, Education (STEM) |
+| C     | IT, Business Administration, Journalism, Teaching, Accounting |
+| D     | Hospitality, Sales & Marketing, Social Work, Community Development |
+| E     | Technical & Vocational trades (plumbing, electrical, tailoring, culinary arts) |
 
-## How accounts work
+Edit `careerRules` in `server.js` to change these.
 
-- **Register** (`register.html`) creates either a student or a teacher account.
-- **Students** log grades and get a recommended career path; every submission is saved and shown in a personal history table.
-- **Teachers** see a read-only list of all students and their most recent submission.
-- Sessions are stored as a JWT in the browser's local storage and sent as a `Bearer` token on API requests.
+## Chatbot
 
-## API summary
-
-| Method | Route                          | Access          | Purpose                          |
-|--------|--------------------------------|-----------------|-----------------------------------|
-| POST   | `/api/auth/register`           | public          | Create a student or teacher account |
-| POST   | `/api/auth/login`               | public          | Log in and receive a token        |
-| POST   | `/api/career`                    | student         | Submit grades, get a suggestion   |
-| GET    | `/api/career/history`            | student         | Your own submission history       |
-| GET    | `/api/teacher/students`          | teacher         | All students + latest submission  |
-| GET    | `/api/teacher/students/:id/history` | teacher     | One student's full history        |
-
-## Before going live
-
-- Replace the placeholder WhatsApp number in `student.html`.
-- Set a strong, random `JWT_SECRET` in `.env` — don't reuse the example.
-- The current setup calls `localhost:5000` directly from the frontend; update `API_BASE` in `Frontend/auth.js` if you deploy the API elsewhere.
+The chatbot is **not AI** — it matches the student's message against keywords
+(`career`, `university`, `grade`, `stress`, etc.) defined in `botRules` inside
+`public/js/chat.js` and returns a scripted advisor reply.

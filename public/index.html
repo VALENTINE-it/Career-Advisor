@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Career Advisor — Find the right path for your grades</title>
+    <meta name="description" content="Enter your grade and get instant, tailored career suggestions. Chat with a career advisor for guidance." />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <a href="index.html" class="brand">🎓 Career Advisor</a>
+      <nav id="navLinks">
+        <a href="login.html" id="loginLink">Login</a>
+        <a href="register.html" id="registerLink" class="btn-ghost">Sign up</a>
+        <span id="userBadge" hidden></span>
+        <button id="logoutBtn" hidden class="btn-ghost">Logout</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Find the career that matches your grades.</h1>
+        <p>Enter your overall grade and get instant, tailored career suggestions. Not sure? Chat with a career advisor.</p>
+      </section>
+
+      <section class="card" id="adviceCard">
+        <h2>Get career advice</h2>
+        <p class="muted">Enter your overall grade (A, B, C, D, or E).</p>
+        <form id="adviceForm" class="row">
+          <input id="gradeInput" name="grade" maxlength="1" placeholder="e.g. B" required />
+          <button type="submit">Advise me</button>
+        </form>
+        <div id="adviceResult" class="result" hidden></div>
+        <p id="loginHint" class="muted" hidden>Please <a href="/login.html">log in</a> to get advice.</p>
+      </section>
+
+      <section class="card">
+        <h2>💬 Chat with a career advisor</h2>
+        <p class="muted">Ask about careers, universities, subjects, stress, or interviews.</p>
+        <div id="chatWindow" class="chat"></div>
+        <form id="chatForm" class="row">
+          <input id="chatInput" placeholder="Type your question..." autocomplete="off" required />
+          <button type="submit">Send</button>
+        </form>
+        <div class="suggestions">
+          <button class="chip" data-msg="Which career fits me?">Which career fits me?</button>
+          <button class="chip" data-msg="How do I choose a university?">Choosing a university</button>
+          <button class="chip" data-msg="I feel stressed about my grades">I feel stressed</button>
+          <button class="chip" data-msg="How do I prepare for an interview?">Interview tips</button>
+        </div>
+      </section>
+    </main>
+
+    <footer><p>© Career Advisor</p></footer>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/advice.js"></script>
+    <script src="/js/chat.js"></script>
+  </body>
+</html>
