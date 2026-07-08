@@ -1,5 +1,6 @@
 exports.suggestCareer = (math, english, science) => {
   math = Number(math);
+  english = Number(english);
   science = Number(science);
 
   if (math >= 70 && science >= 70) {

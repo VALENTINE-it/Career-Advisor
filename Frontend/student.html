@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard · Career Advisory</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <span class="brand">Career Advisory</span>
+    <span class="user-info">
+      <span id="userName"></span>
+      <button id="logoutBtn">Log out</button>
+    </span>
+  </nav>
+
+  <main class="page">
+    <h1>Get your career suggestion</h1>
+    <p>Enter your latest grades to get a recommended career path.</p>
+
+    <div class="card">
+      <form id="gradeForm">
+        <div class="field">
+          <label for="math">Mathematics (0–100)</label>
+          <input type="number" min="0" max="100" id="math" required>
+        </div>
+        <div class="field">
+          <label for="english">English (0–100)</label>
+          <input type="number" min="0" max="100" id="english" required>
+        </div>
+        <div class="field">
+          <label for="science">Science (0–100)</label>
+          <input type="number" min="0" max="100" id="science" required>
+        </div>
+
+        <p class="error-box" id="formError" hidden></p>
+
+        <button type="submit" id="submitBtn" class="accent">Get my recommendation</button>
+      </form>
+
+      <div class="result-banner" id="result" hidden>
+        <div class="label">Recommended path</div>
+        <div class="career" id="resultCareer"></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Your history</h2>
+    <div id="historyWrap">
+      <p class="empty-state">Loading…</p>
+    </div>
+  </main>
+
+  <!-- Chatbot -->
+  <div id="chatbot" class="chatbot closed">
+    <button id="chatToggle" class="chat-toggle" aria-expanded="false" aria-controls="chatPanel">
+      💬 Advisor chat
+    </button>
+    <div id="chatPanel" class="chat-panel">
+      <div class="chat-panel-header">
+        <span>Advisor Chat</span>
+        <button id="chatClose" class="chat-close" aria-label="Close chat">×</button>
+      </div>
+      <div id="chatbox" class="chatbox"></div>
+      <div class="chat-input-row">
+        <input type="text" id="userInput" placeholder="Ask about a career…">
+      </div>
+    </div>
+  </div>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/2547XXXXXXXX" target="_blank" rel="noopener" class="whatsapp">
+    ☎ Chat on WhatsApp
+  </a>
+
+  <script src="auth.js"></script>
+  <script src="script.js"></script>
+  <script src="chatbot.js"></script>
+</body>
+</html>
