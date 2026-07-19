@@ -4,11 +4,16 @@
   "description": "Career advisor website with login, registration, grade-based advice, and rule-based chatbot.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "sass:build": "sass public/scss/styles.scss public/css/styles.css",
+    "sass:watch": "sass --watch public/scss/styles.scss public/css/styles.css"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.19.2",
     "express-session": "^1.18.0"
+  },
+  "devDependencies": {
+    "sass": "^1.77.8"
   }
 }
