@@ -3,59 +3,415 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Career Advisor — Find the right path for your grades</title>
+    <title>CareerPath Kenya — Find the right path for your grades</title>
     <meta name="description" content="Enter your grade and get instant, tailored career suggestions. Chat with a career advisor for guidance." />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <header class="nav">
-      <a href="index.html" class="brand">🎓 Career Advisor</a>
-      <nav id="navLinks">
-        <a href="login.html" id="loginLink">Login</a>
-        <a href="register.html" id="registerLink" class="btn-ghost">Sign up</a>
-        <span id="userBadge" hidden></span>
-        <button id="logoutBtn" hidden class="btn-ghost">Logout</button>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero">
-        <h1>Find the career that matches your grades.</h1>
-        <p>Enter your overall grade and get instant, tailored career suggestions. Not sure? Chat with a career advisor.</p>
-      </section>
-
-      <section class="card" id="adviceCard">
-        <h2>Get career advice</h2>
-        <p class="muted">Enter your overall grade (A, B, C, D, or E).</p>
-        <form id="adviceForm" class="row">
-          <input id="gradeInput" name="grade" maxlength="1" placeholder="e.g. B" required />
-          <button type="submit">Advise me</button>
-        </form>
-        <div id="adviceResult" class="result" hidden></div>
-        <p id="loginHint" class="muted" hidden>Please <a href="/login.html">log in</a> to get advice.</p>
-      </section>
-
-      <section class="card">
-        <h2>💬 Chat with a career advisor</h2>
-        <p class="muted">Ask about careers, universities, subjects, stress, or interviews.</p>
-        <div id="chatWindow" class="chat"></div>
-        <form id="chatForm" class="row">
-          <input id="chatInput" placeholder="Type your question..." autocomplete="off" required />
-          <button type="submit">Send</button>
-        </form>
-        <div class="suggestions">
-          <button class="chip" data-msg="Which career fits me?">Which career fits me?</button>
-          <button class="chip" data-msg="How do I choose a university?">Choosing a university</button>
-          <button class="chip" data-msg="I feel stressed about my grades">I feel stressed</button>
-          <button class="chip" data-msg="How do I prepare for an interview?">Interview tips</button>
+    <div class="app-container">
+     
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-logo-card">
+            
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+            </svg>
+          </div>
+          <div class="sidebar-brand">
+            <span class="brand-title">CareerPath</span>
+            <span class="brand-subtitle">Kenya</span>
+          </div>
         </div>
-      </section>
-    </main>
 
-    <footer><p>© Career Advisor</p></footer>
+        <div class="sidebar-nav-container">
+          <nav class="sidebar-section">
+            <span class="sidebar-section-title">Navigate</span>
+            <div class="sidebar-link active" data-target="dashboardView">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+              Dashboard
+            </div>
+            <div class="sidebar-link" data-target="assessmentView">
+              <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+              Self-Assessment
+            </div>
+            <div class="sidebar-link" data-target="matcherView">
+              <svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+              Course Matcher
+            </div>
+            <div class="sidebar-link" data-target="libraryView">
+              <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+              Career Library
+            </div>
+            <div class="sidebar-link" data-target="chatView">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              Chat Advisor
+            </div>
+          </nav>
 
-    <script src="/js/auth.js"></script>
-    <script src="/js/advice.js"></script>
-    <script src="/js/chat.js"></script>
+          <nav class="sidebar-section">
+            <span class="sidebar-section-title">Resources</span>
+            <a href="https://kuccps.net" target="_blank" class="sidebar-link">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              KUCCPS Portal
+            </a>
+            <a href="https://knec.ac.ke" target="_blank" class="sidebar-link">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              KNEC Website
+            </a>
+            <a href="https://www.tveta.go.ke" target="_blank" class="sidebar-link">
+              <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              TVETA Portal
+            </a>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer">
+          <p>© 2026 CareerPath Kenya</p>
+          <p style="margin-top: 4px; font-size: 0.65rem; color: #4b5b75;">Guidance portal</p>
+        </div>
+      </aside>
+
+      
+      <main class="main-content">
+       
+        <header class="main-header">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <button id="hamburgerBtn" class="hamburger-btn" aria-label="Toggle Sidebar">
+              <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            <div class="breadcrumbs">
+              Home <span style="color: var(--text-muted);">/</span> <span id="breadcrumbActive">Dashboard</span>
+            </div>
+          </div>
+
+          <div class="header-right">
+          
+            <div id="userProfile" class="user-profile-badge" hidden>
+              <div class="avatar-circle" id="userAvatar">S</div>
+              <span id="userBadge">Student</span>
+            </div>
+         
+            <button id="logoutBtn" class="btn-logout" hidden>Logout</button>
+
+            <div id="authLinks" class="header-auth-links">
+              <a href="login.html" class="btn btn-secondary" style="color: var(--text-main); border-color: var(--border); padding: 8px 18px;">Log In</a>
+              <a href="register.html" class="btn btn-primary">Sign up</a>
+            </div>
+          </div>
+        </header>
+
+     
+        <div class="workspace-views">
+          
+         
+          <section id="dashboardView" class="view-section active">
+           
+            <div class="hero-banner">
+              <div class="welcome-badge">Welcome back</div>
+              <h1 class="hero-title">Find the career that fits <span>you.</span></h1>
+              <p class="hero-desc">Explore 77+ careers across 12 fields, take a short interest assessment, and match your KCSE grades to 62+ university and TVET courses.</p>
+              <div class="hero-actions">
+                <button class="btn btn-primary" onclick="switchView('assessmentView')">Start self-assessment →</button>
+                <button class="btn btn-secondary" onclick="switchView('libraryView')">Browse careers</button>
+              </div>
+            </div>
+
+            <!-- STATS ROW -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-label">Careers Profiled</div>
+                <div class="stat-num">77+</div>
+                <div class="stat-sub">Across STEM, arts, trades &amp; more</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Courses in Database</div>
+                <div class="stat-num">62+</div>
+                <div class="stat-sub">KUCCPS-style cluster matches</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Assessment Items</div>
+                <div class="stat-num">18</div>
+                <div class="stat-sub">Holland RIASEC framework</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-label">Growth Careers</div>
+                <div class="stat-num">12</div>
+                <div class="stat-sub">High-demand paths in Kenya</div>
+              </div>
+            </div>
+
+            <!-- HOW TO USE SECTION -->
+            <div class="section-header">
+              <h2>How to use CareerPath</h2>
+              <p>Three tools that work together to guide your decision.</p>
+            </div>
+
+            <div class="tools-grid">
+              <div class="tool-card" onclick="switchView('assessmentView')">
+                <div class="tool-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                </div>
+                <h3 class="tool-title">Not sure where to start?</h3>
+                <p class="tool-text">Answer 18 quick questions to reveal your top interest areas and matching careers.</p>
+              </div>
+
+              <div class="tool-card" onclick="switchView('libraryView')">
+                <div class="tool-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"></polygon></svg>
+                </div>
+                <h3 class="tool-title">Explore any field</h3>
+                <p class="tool-text">From software engineering to tourism, filter by category and growth prospects.</p>
+              </div>
+
+              <div class="tool-card" onclick="switchView('matcherView')">
+                <div class="tool-icon-wrapper">
+                  <svg viewBox="0 0 24 24"><polygon points="12 2 22 22 2 22"></polygon></svg>
+                </div>
+                <h3 class="tool-title">Check course eligibility</h3>
+                <p class="tool-text">Enter your KCSE grades to see which university and TVET programs you qualify for.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SELF-ASSESSMENT VIEW -->
+          <section id="assessmentView" class="view-section">
+            <div class="section-header">
+              <h2>Self-Assessment Explorer</h2>
+              <p>Select your favorite subject or interest area to see matching careers instantly.</p>
+            </div>
+
+            <div class="subject-explorer-grid">
+              <div class="subject-card" data-subject="math">
+                <div class="subject-icon">📐</div>
+                <div class="subject-name">Math &amp; Finance</div>
+                <div class="subject-desc">Analytical minds, problem solving, data science</div>
+              </div>
+              <div class="subject-card" data-subject="science">
+                <div class="subject-icon">🧪</div>
+                <div class="subject-name">Health &amp; Sciences</div>
+                <div class="subject-desc">Biology, chemistry, medicine, environmental studies</div>
+              </div>
+              <div class="subject-card" data-subject="arts">
+                <div class="subject-icon">🎨</div>
+                <div class="subject-name">Humanities &amp; Arts</div>
+                <div class="subject-desc">Languages, history, content creation, social work</div>
+              </div>
+            </div>
+
+            <div id="assessmentResult" class="dashboard-card" style="display: none;">
+              <h3 id="assessmentResultTitle">Matching Careers</h3>
+              <p id="assessmentResultText" style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.95rem;"></p>
+              <div id="assessmentResultList" class="result-careers-list"></div>
+            </div>
+          </section>
+
+          <!-- COURSE MATCHER VIEW -->
+          <section id="matcherView" class="view-section">
+            <div class="section-header">
+              <h2>Course &amp; Grade Matcher</h2>
+              <p>Map your KCSE overall grade to eligible university courses and TVET programs.</p>
+            </div>
+
+            <div class="dashboard-card">
+              <h3>Get career advice</h3>
+              <p class="muted" style="margin-bottom: 20px;">Click on a grade card below to instantly get career suggestions and eligible programs.</p>
+
+              <!-- VISUAL GRADE SELECTOR CARDS -->
+              <div class="grade-selector-container">
+                <div class="grade-cards-grid">
+                  <div class="grade-btn-card" data-grade="A">
+                    <div class="grade-letter">A</div>
+                    <div class="grade-label">Top-tier</div>
+                  </div>
+                  <div class="grade-btn-card" data-grade="B">
+                    <div class="grade-letter">B</div>
+                    <div class="grade-label">Professional</div>
+                  </div>
+                  <div class="grade-btn-card" data-grade="C">
+                    <div class="grade-letter">C</div>
+                    <div class="grade-label">Diploma/Degree</div>
+                  </div>
+                  <div class="grade-btn-card" data-grade="D">
+                    <div class="grade-letter">D</div>
+                    <div class="grade-label">Certificate</div>
+                  </div>
+                  <div class="grade-btn-card" data-grade="E">
+                    <div class="grade-letter">E</div>
+                    <div class="grade-label">Vocational</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Backup Form Input -->
+              <form id="adviceForm" class="form-group-inline">
+                <input id="gradeInput" name="grade" maxlength="1" placeholder="Or type your grade (A, B, C, D, or E)..." required style="text-transform: uppercase;" />
+                <button type="submit" class="btn">Match Grade</button>
+              </form>
+
+              <!-- Results Box -->
+              <div id="adviceResult" class="matcher-result-box" style="display: none;"></div>
+              
+              <div id="loginHint" class="dashboard-card" style="margin-top: 24px; background: var(--accent-light); border-color: var(--accent); display: none;">
+                <p style="color: var(--accent-dark); font-weight: 600;">🔒 Access restricted</p>
+                <p style="font-size: 0.9rem; color: var(--text-main); margin-top: 4px;">Please <a href="/login.html" style="font-weight: 700; text-decoration: underline;">log in</a> to get advice and save your match history.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- CAREER LIBRARY VIEW -->
+          <section id="libraryView" class="view-section">
+            <div class="section-header">
+              <h2>Career &amp; Course Library</h2>
+              <p>Explore all available career tracks and academic levels structured in the system database.</p>
+            </div>
+
+            <div class="library-grid">
+              <div class="library-card">
+                <div class="library-card-header">
+                  <div class="library-card-title">
+                    <h4>Top-Tier Programs</h4>
+                    <p>Highest competitive degrees</p>
+                  </div>
+                  <div class="library-grade-pill">Grade A</div>
+                </div>
+                <div class="library-careers">
+                  <div class="library-career-item">Medicine &amp; Surgery</div>
+                  <div class="library-career-item">Engineering (Civil, Electrical, Mechanical)</div>
+                  <div class="library-career-item">Actuarial Science &amp; Data Analytics</div>
+                  <div class="library-career-item">Law &amp; Jurisprudence</div>
+                  <div class="library-career-item">Architecture &amp; Urban Design</div>
+                </div>
+              </div>
+
+              <div class="library-card">
+                <div class="library-card-header">
+                  <div class="library-card-title">
+                    <h4>Professional Tracks</h4>
+                    <p>Direct professional degree programs</p>
+                  </div>
+                  <div class="library-grade-pill">Grade B</div>
+                </div>
+                <div class="library-careers">
+                  <div class="library-career-item">Computer Science &amp; IT Systems</div>
+                  <div class="library-career-item">Nursing &amp; Healthcare Operations</div>
+                  <div class="library-career-item">Pharmacy &amp; Pharmaceutical Sciences</div>
+                  <div class="library-career-item">Economics, Finance &amp; Statistics</div>
+                  <div class="library-career-item">STEM Education &amp; Pedagogy</div>
+                </div>
+              </div>
+
+              <div class="library-card">
+                <div class="library-card-header">
+                  <div class="library-card-title">
+                    <h4>Diploma &amp; Degrees</h4>
+                    <p>Highly practical skills and management</p>
+                  </div>
+                  <div class="library-grade-pill">Grade C</div>
+                </div>
+                <div class="library-careers">
+                  <div class="library-career-item">Information Technology (Diploma/Degree)</div>
+                  <div class="library-career-item">Business Administration &amp; Commerce</div>
+                  <div class="library-career-item">Journalism, Media &amp; Communications</div>
+                  <div class="library-career-item">Primary &amp; Early Childhood Education</div>
+                  <div class="library-career-item">Accounting &amp; Auditing (CPA tracks)</div>
+                </div>
+              </div>
+
+              <div class="library-card">
+                <div class="library-card-header">
+                  <div class="library-card-title">
+                    <h4>Diploma &amp; Certificates</h4>
+                    <p>Vocational careers and administration</p>
+                  </div>
+                  <div class="library-grade-pill">Grade D</div>
+                </div>
+                <div class="library-careers">
+                  <div class="library-career-item">Hospitality &amp; Hotel Management</div>
+                  <div class="library-career-item">Sales, Advertising &amp; Marketing</div>
+                  <div class="library-career-item">Social Work &amp; Community Development</div>
+                  <div class="library-career-item">Public Relations &amp; Client Relations</div>
+                </div>
+              </div>
+
+              <div class="library-card" style="grid-column: span 2;">
+                <div class="library-card-header">
+                  <div class="library-card-title">
+                    <h4>Vocational &amp; TVET Tracks</h4>
+                    <p>Hands-on engineering, technology and creative trades</p>
+                  </div>
+                  <div class="library-grade-pill">Grade E</div>
+                </div>
+                <div class="library-careers" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                  <div class="library-career-item">Plumbing &amp; Water Engineering</div>
+                  <div class="library-career-item">Electrical Installation &amp; Smart Wiring</div>
+                  <div class="library-career-item">Tailoring, Fashion &amp; Apparel Design</div>
+                  <div class="library-career-item">Culinary Arts, Baking &amp; Food Operations</div>
+                  <div class="library-career-item">Auto Mechanics &amp; Hybrid Vehicle repair</div>
+                  <div class="library-career-item">Agricultural Trades &amp; Organic Farming</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- CHAT ADVISOR VIEW -->
+          <section id="chatView" class="view-section">
+            <div class="section-header">
+              <h2>Interactive Career Chatbot</h2>
+              <p>Chat with our intelligent guidance bot regarding university picks, Stress, and job prep.</p>
+            </div>
+
+            <div class="chat-workspace">
+              <!-- Sidebar Guide & FAQs -->
+              <div class="chat-sidebar">
+                <h4>Guidance Tips</h4>
+                <p>Click on one of the quick suggestions below or type your question in the chat console to start your guidance session.</p>
+                
+                <div class="chat-suggestions-grid">
+                  <div class="chat-suggestion-chip" data-msg="Which career fits me?">🎯 Which career fits me?</div>
+                  <div class="chat-suggestion-chip" data-msg="How do I choose a university?">🏛️ Choosing a university</div>
+                  <div class="chat-suggestion-chip" data-msg="I feel stressed about my grades">🌱 I feel stressed</div>
+                  <div class="chat-suggestion-chip" data-msg="How do I prepare for an interview?">💼 Interview tips</div>
+                </div>
+              </div>
+
+              <!-- Main Chat window -->
+              <div class="chat-window-wrapper">
+                <div class="chat-header">
+                  <div class="advisor-avatar">DA</div>
+                  <div class="chat-header-info">
+                    <h4>Dr. Advisor</h4>
+                    <p>Active Guidance Coach</p>
+                  </div>
+                </div>
+
+                <!-- Messages Window -->
+                <div class="chat-messages" id="chatWindow">
+                  <!-- JS will load initial welcome message -->
+                </div>
+
+                <!-- Input form -->
+                <div class="chat-input-bar">
+                  <form id="chatForm" class="chat-form">
+                    <input id="chatInput" placeholder="Ask Dr. Advisor anything (e.g. 'tell me about grade B', 'help with stress')..." autocomplete="off" required />
+                    <button type="submit" aria-label="Send message">
+                      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/advice.js"></script>
+    <script src="js/chat.js"></script>
   </body>
 </html>

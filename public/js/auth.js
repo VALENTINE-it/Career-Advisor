@@ -2,28 +2,53 @@
   try {
     const res = await fetch("/api/me");
     const { user } = await res.json();
-    const badge = document.getElementById("userBadge");
+    const userProfile = document.getElementById("userProfile");
+    const userAvatar = document.getElementById("userAvatar");
+    const userBadge = document.getElementById("userBadge");
     const logoutBtn = document.getElementById("logoutBtn");
-    const loginLink = document.getElementById("loginLink");
-    const registerLink = document.getElementById("registerLink");
+    const authLinks = document.getElementById("authLinks");
     const loginHint = document.getElementById("loginHint");
-    const adviceForm = document.getElementById("adviceForm");
 
     if (user) {
-      if (badge) { badge.hidden = false; badge.textContent = `Hi, ${user.name}`; }
+      if (userProfile) {
+        userProfile.hidden = false;
+        userProfile.style.display = "flex";
+      }
+      if (userBadge) {
+        userBadge.textContent = user.name;
+      }
+      if (userAvatar) {
+        userAvatar.textContent = user.name ? user.name.charAt(0).toUpperCase() : "S";
+      }
       if (logoutBtn) {
         logoutBtn.hidden = false;
+        logoutBtn.style.display = "inline-flex";
         logoutBtn.onclick = async () => {
           await fetch("/api/logout", { method: "POST" });
           location.reload();
         };
       }
-      if (loginLink) loginLink.hidden = true;
-      if (registerLink) registerLink.hidden = true;
+      if (authLinks) {
+        authLinks.style.display = "none";
+      }
+      if (loginHint) {
+        loginHint.style.display = "none";
+      }
     } else {
-      if (loginHint && adviceForm) {
-        loginHint.hidden = false;
+      if (userProfile) {
+        userProfile.style.display = "none";
+      }
+      if (logoutBtn) {
+        logoutBtn.style.display = "none";
+      }
+      if (authLinks) {
+        authLinks.style.display = "flex";
+      }
+      if (loginHint) {
+        loginHint.style.display = "block";
       }
     }
-  } catch (e) { /* no-op */ }
+  } catch (e) {
+    console.error("Auth initialization failed:", e);
+  }
 })();

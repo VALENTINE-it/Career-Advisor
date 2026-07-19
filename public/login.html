@@ -3,43 +3,71 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login — Career Advisor</title>
+    <title>Login — CareerPath Kenya</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-    <header class="nav">
-      <a href="index.html" class="brand">🎓 Career Advisor</a>
-      <nav><a href="register.html">Sign up</a></nav>
-    </header>
-    <main class="center">
-      <form id="loginForm" class="card auth">
-        <h1>Welcome back</h1>
-        <p class="muted">Log in to get personalized career advice.</p>
-        <label>Email<input type="email" name="email" required /></label>
-        <label>Password<input type="password" name="password" required /></label>
-        <button type="submit">Log in</button>
-        <p id="loginError" class="error" hidden></p>
-        <p class="muted">No account? <a href="register.html">Register</a></p>
-      </form>
-    </main>
-    <script src="js/auth.js"></script>
+    <div class="auth-center-wrapper">
+      <div class="auth-card">
+        <div class="auth-header">
+          <!-- Logo cap -->
+          <div style="width: 48px; height: 48px; background: var(--accent); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--bg-sidebar); margin: 0 auto 16px; font-size: 1.4rem; box-shadow: 0 4px 10px rgba(245, 166, 35, 0.3);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
+            </svg>
+          </div>
+          <h1>Welcome back</h1>
+          <p>Log in to access your dashboard and matching history.</p>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+          <div class="auth-field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="e.g. student@domain.com" required />
+          </div>
+
+          <div class="auth-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required />
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Log in</button>
+          
+          <div id="loginError" style="padding: 12px; background: #fee2e2; border-left: 4px solid var(--danger); border-radius: var(--radius-sm); color: var(--danger); font-size: 0.88rem; font-weight: 600; text-align: left;" hidden></div>
+        </form>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="register.html">Create Account</a></p>
+          <p style="margin-top: 14px; font-size: 0.75rem;"><a href="index.html" style="color: var(--text-muted); font-weight: 500;">← Back to home</a></p>
+        </div>
+      </div>
+    </div>
+
     <script>
       document.getElementById("loginForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const fd = new FormData(e.target);
-        const res = await fetch("/api/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(Object.fromEntries(fd)),
-        });
-        const data = await res.json();
-        if (!res.ok) {
-          const err = document.getElementById("loginError");
-          err.textContent = data.error || "Login failed";
+        const err = document.getElementById("loginError");
+        err.hidden = true;
+        
+        try {
+          const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(Object.fromEntries(fd)),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            err.textContent = data.error || "Login failed";
+            err.hidden = false;
+            return;
+          }
+          location.href = "/";
+        } catch (e) {
+          err.textContent = "Server connection lost. Please try again.";
           err.hidden = false;
-          return;
         }
-        location.href = "/";
       });
     </script>
   </body>

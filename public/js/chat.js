@@ -22,7 +22,7 @@ const botRules = [
   },
   {
     keywords: ["grade e"],
-    reply: "Jaribu biashara.",
+    reply: "A grade E maps to technical and vocational training (TVET). Consider options in Electrical, Culinary Arts, plumbing or automotive mechanics for quick path to employment.",
   },
   {
     keywords: ["career", "what should i do", "which career", "job", "profession"],
@@ -77,34 +77,45 @@ function botReply(text) {
   return fallback;
 }
 
-const chatWindow = document.getElementById("chatWindow");
-const chatForm = document.getElementById("chatForm");
-const chatInput = document.getElementById("chatInput");
+document.addEventListener('DOMContentLoaded', () => {
+  const chatWindow = document.getElementById("chatWindow");
+  const chatForm = document.getElementById("chatForm");
+  const chatInput = document.getElementById("chatInput");
 
-function addMsg(who, text) {
-  const div = document.createElement("div");
-  div.className = `msg ${who}`;
-  div.innerHTML = `<div class="bubble"></div>`;
-  div.querySelector(".bubble").textContent = text;
-  chatWindow.appendChild(div);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
-}
+  function addMsg(who, text) {
+    if (!chatWindow) return;
+    const div = document.createElement("div");
+    div.className = `chat-msg ${who}`;
+    div.innerHTML = `<div class="chat-bubble"></div>`;
+    div.querySelector(".chat-bubble").textContent = text;
+    chatWindow.appendChild(div);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
 
-addMsg("bot", "Hi! I'm your career advisor. Ask me anything about careers, grades, universities, or studying.");
+  // Initial greeting
+  if (chatWindow && chatWindow.children.length === 0) {
+    addMsg("bot", "Hi! I'm Dr. Advisor, your digital career coach. Ask me anything about university choices, KCSE grade targets, handling stress, or interviews.");
+  }
 
-chatForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const text = chatInput.value.trim();
-  if (!text) return;
-  addMsg("user", text);
-  chatInput.value = "";
-  setTimeout(() => addMsg("bot", botReply(text)), 350);
-});
+  // Handle send message form submit
+  chatForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!chatInput) return;
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addMsg("user", text);
+    chatInput.value = "";
+    setTimeout(() => addMsg("bot", botReply(text)), 350);
+  });
 
-document.querySelectorAll(".chip").forEach((chip) => {
-  chip.addEventListener("click", () => {
-    const msg = chip.dataset.msg;
-    addMsg("user", msg);
-    setTimeout(() => addMsg("bot", botReply(msg)), 350);
+  // Handle chips clicks (both standard and new suggestions)
+  document.querySelectorAll(".chat-suggestion-chip, .chip").forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const msg = chip.dataset.msg;
+      if (msg) {
+        addMsg("user", msg);
+        setTimeout(() => addMsg("bot", botReply(msg)), 350);
+      }
+    });
   });
 });
