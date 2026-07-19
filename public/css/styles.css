@@ -320,8 +320,7 @@ a:hover {
 
 /* HERO BANNER CARD */
 .hero-banner {
-  background: linear-gradient(135deg, #0c2340 0%, #061224 100%);
-  background-image: radial-gradient(circle at 85% 20%, rgba(245, 166, 35, 0.16) 0%, transparent 60%);
+  background:#0b192e;
   border-radius: var(--radius-lg);
   padding: 48px;
   color: #ffffff;
